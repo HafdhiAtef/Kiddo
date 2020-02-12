@@ -107,6 +107,41 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
         }
 
+        // reclamation_homepage
+        if ('' === $trimmedPathinfo) {
+            $ret = array (  '_controller' => 'ReclamationBundle\\Controller\\DefaultController::indexAction',  '_route' => 'reclamation_homepage',);
+            if ('/' === substr($pathinfo, -1)) {
+                // no-op
+            } elseif ('GET' !== $canonicalMethod) {
+                goto not_reclamation_homepage;
+            } else {
+                return array_replace($ret, $this->redirect($rawPathinfo.'/', 'reclamation_homepage'));
+            }
+
+            return $ret;
+        }
+        not_reclamation_homepage:
+
+        // reclamation_ajout
+        if ('/addReclamation' === $pathinfo) {
+            return array (  '_controller' => 'ReclamationBundle\\Controller\\ReclamationController::ajoutAction',  '_route' => 'reclamation_ajout',);
+        }
+
+        // reclamation_affiche
+        if ('/showReclamation' === $pathinfo) {
+            return array (  '_controller' => 'ReclamationBundle\\Controller\\ReclamationController::afficherAction',  '_route' => 'reclamation_affiche',);
+        }
+
+        // reclamation_delete
+        if (0 === strpos($pathinfo, '/deleteReclamation') && preg_match('#^/deleteReclamation/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, ['_route' => 'reclamation_delete']), array (  '_controller' => 'ReclamationBundle\\Controller\\ReclamationController::deleteAction',));
+        }
+
+        // reclamation_update
+        if (0 === strpos($pathinfo, '/updateReclamation') && preg_match('#^/updateReclamation/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, ['_route' => 'reclamation_update']), array (  '_controller' => 'ReclamationBundle\\Controller\\ReclamationController::updateAction',));
+        }
+
         // user_homepage
         if ('' === $trimmedPathinfo) {
             $ret = array (  '_controller' => 'UserBundle\\Controller\\DefaultController::indexAction',  '_route' => 'user_homepage',);

@@ -19,6 +19,7 @@
       <parameter key="AppBundle">AppBundle\AppBundle</parameter>
       <parameter key="FOSUserBundle">FOS\UserBundle\FOSUserBundle</parameter>
       <parameter key="UserBundle">UserBundle\UserBundle</parameter>
+      <parameter key="ReclamationBundle">ReclamationBundle\ReclamationBundle</parameter>
       <parameter key="DebugBundle">Symfony\Bundle\DebugBundle\DebugBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
       <parameter key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</parameter>
@@ -76,6 +77,11 @@
         <parameter key="path">C:\wamp\www\Kiddo\src\UserBundle</parameter>
         <parameter key="namespace">UserBundle</parameter>
       </parameter>
+      <parameter key="ReclamationBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">C:\wamp\www\Kiddo\src\ReclamationBundle</parameter>
+        <parameter key="namespace">ReclamationBundle</parameter>
+      </parameter>
       <parameter key="DebugBundle" type="collection">
         <parameter key="parent">null</parameter>
         <parameter key="path">C:\wamp\www\Kiddo\vendor\symfony\symfony\src\Symfony\Bundle\DebugBundle</parameter>
@@ -108,7 +114,7 @@
     <parameter key="container.dumper.inline_class_loader">true</parameter>
     <parameter key="database_host">127.0.0.1</parameter>
     <parameter key="database_port">null</parameter>
-    <parameter key="database_name">testfosuser</parameter>
+    <parameter key="database_name">kiddo</parameter>
     <parameter key="database_user">root</parameter>
     <parameter key="database_password">null</parameter>
     <parameter key="mailer_transport">smtp</parameter>
@@ -3781,6 +3787,14 @@
         <argument>!User</argument>
       </call>
       <call method="addPath">
+        <argument>C:\wamp\www\Kiddo\src\ReclamationBundle/Resources/views</argument>
+        <argument>Reclamation</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\wamp\www\Kiddo\src\ReclamationBundle/Resources/views</argument>
+        <argument>!Reclamation</argument>
+      </call>
+      <call method="addPath">
         <argument>C:\wamp\www\Kiddo\vendor\symfony\symfony\src\Symfony\Bundle\DebugBundle/Resources/views</argument>
         <argument>Debug</argument>
       </call>
@@ -4218,7 +4232,7 @@
         <argument key="driver">pdo_mysql</argument>
         <argument key="host">127.0.0.1</argument>
         <argument key="port">null</argument>
-        <argument key="dbname">testfosuser</argument>
+        <argument key="dbname">kiddo</argument>
         <argument key="user">root</argument>
         <argument key="password">null</argument>
         <argument key="charset">UTF8</argument>
@@ -4372,6 +4386,7 @@
       <call method="setEntityNamespaces">
         <argument type="collection">
           <argument key="UserBundle">UserBundle\Entity</argument>
+          <argument key="ReclamationBundle">ReclamationBundle\Entity</argument>
         </argument>
       </call>
       <call method="setMetadataCacheImpl">
@@ -4418,12 +4433,17 @@
       <argument type="service" id="annotations.cached_reader"/>
       <argument type="collection">
         <argument>C:\wamp\www\Kiddo\src\UserBundle\Entity</argument>
+        <argument>C:\wamp\www\Kiddo\src\ReclamationBundle\Entity</argument>
       </argument>
     </service>
     <service id="doctrine.orm.default_metadata_driver" class="Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain" public="false">
       <call method="addDriver">
         <argument type="service" id="doctrine.orm.default_annotation_metadata_driver"/>
         <argument>UserBundle\Entity</argument>
+      </call>
+      <call method="addDriver">
+        <argument type="service" id="doctrine.orm.default_annotation_metadata_driver"/>
+        <argument>ReclamationBundle\Entity</argument>
       </call>
       <call method="addDriver">
         <argument type="service">

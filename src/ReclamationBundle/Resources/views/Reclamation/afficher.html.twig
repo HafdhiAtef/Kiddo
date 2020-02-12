@@ -1,0 +1,20 @@
+<h2> Liste des Reclamations</h2>
+{% for reclamation in reclamations %}
+   <table border="1">
+       <form>
+        <tr><td>ID</td>
+        <td>Titre</td>
+        <td>Contenu</td>
+            <td></td>
+            <td></td>
+        </tr>
+    <tr><td>{{ reclamation.id  }}</td>
+        <td>{{ reclamation.titre }}</td>
+        <td>{{ reclamation.contenu }}</td>
+        <td> <a href="{{ path('reclamation_delete',{id:reclamation.id}) }}"> delete </a>  </td>
+        <td> <a href="{{ path('reclamation_update',{id:reclamation.id}) }}"> update </a> </td>
+
+    </tr>
+       </form>
+   </table>
+{% endfor %}
